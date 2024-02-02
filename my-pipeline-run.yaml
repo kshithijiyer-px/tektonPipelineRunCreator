@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: clone-build-push-run-2-
+spec:
+  pipelineRef:
+    name: clone-build-push-2
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  workspaces:
+  - name: shared-data
+    persistentVolumeClaim:
+      claimName: test-pvc-2
+  - name: docker-credentials
+    secret:
+      secretName: docker-credentials
+  params:
+  - name: repo-url
+    value: https://github.com/google/docsy-example.git
+  - name: image-reference
+    value: docker.pwx.dev.purestorage.com/kshithij:test1
