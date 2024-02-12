@@ -5,6 +5,10 @@ metadata:
 spec:
   pipelineRef:
     name: clone-build-push-2
+  taskRunTemplate:
+    podTemplate:
+      securityContext:
+        fsGroup: 65532
   workspaces:
   - name: shared-data
     persistentVolumeClaim:
